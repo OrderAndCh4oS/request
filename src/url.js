@@ -1,15 +1,15 @@
 import extractKey from './utility/extract-key';
 
-export function makeRoute(baseUrl, endpoint, params = false, key = 'id') {
+export function makeRoute(baseUrl, endpoint, params = null, key = 'id') {
     return makeUrl(
         baseUrl,
         makeEndpoint(endpoint, params, key),
-        params,
+        makeParams(params),
     );
 }
 
 export function makeUrl(baseUrl, endpoint, params) {
-    return baseUrl + endpoint + makeParams(params);
+    return baseUrl + endpoint + params;
 }
 
 export function makeEndpoint(endpoint, params, key = 'id') {
@@ -18,7 +18,7 @@ export function makeEndpoint(endpoint, params, key = 'id') {
 }
 
 export function makeParams(params) {
-    return params
+    return Array.isArray(params)
         ? '?' + Object.keys(params)
         .map(key => key + '=' + listValues(params, key))
         .join('&')

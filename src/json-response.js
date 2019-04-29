@@ -29,7 +29,7 @@ export default class JsonResponse {
     handleSuccessful = response => response.json()
         .then(json => ({
             type: ResponseType.SUCCESS,
-            data: json.data,
+            data: json,
         }));
 
     handleAuthenticationError = response => response.json()
@@ -44,7 +44,7 @@ export default class JsonResponse {
     handleUnauthorised = response => response.json()
         .then(json => ({
             type: ResponseType.UNAUTHORIZED,
-            message: json.message,
+            message: json,
         }));
 
     handleNotFound = response => response.json()
@@ -56,7 +56,7 @@ export default class JsonResponse {
     handleInvalidData = response => response.json()
         .then(json => ({
             type: ResponseType.INVALID,
-            errors: json.errors,
+            errors: json,
         }));
 
     handleError = response => response.json()

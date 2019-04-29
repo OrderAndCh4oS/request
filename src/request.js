@@ -17,14 +17,14 @@ export default class Request {
     };
 
     get(endpoint, params = null) {
-        return this._fetch.get(this._baseUrl + makeRoute(endpoint, params)).then(
+        return this._fetch.get(makeRoute(this._baseUrl, endpoint, params)).then(
             this._response.handleResponse,
             this._response.handleErrorResponse,
         );
     }
 
     post(endpoint, values, params = null) {
-        return this._fetch.post(this._baseUrl + makeRoute(endpoint, params), values)
+        return this._fetch.post(makeRoute(this._baseUrl, endpoint, params), values)
             .then(
                 this._response.handleResponse,
                 this._response.handleErrorResponse,
@@ -32,7 +32,7 @@ export default class Request {
     }
 
     put(endpoint, values, params = null) {
-        return this._fetch.put(this._baseUrl + makeRoute(endpoint, params), values)
+        return this._fetch.put(makeRoute(this._baseUrl, endpoint, params), values)
             .then(
                 this._response.handleResponse,
                 this._response.handleErrorResponse,
@@ -40,7 +40,7 @@ export default class Request {
     }
 
     delete(endpoint, params = null) {
-        return this._fetch.delete(this._baseUrl + makeRoute(endpoint, params))
+        return this._fetch.delete(makeRoute(this._baseUrl, endpoint, params))
             .then(
                 this._response.handleResponse,
                 this._response.handleErrorResponse,
