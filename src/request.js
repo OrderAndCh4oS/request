@@ -1,4 +1,4 @@
-import { makeRoute } from './url';
+import { makeUrl } from './url';
 import Fetch from './fetch';
 import JsonResponse from './json-response';
 
@@ -9,22 +9,16 @@ export default class Request {
         this._fetch = fetch || new Fetch();
     }
 
-    request(fetch, params = null, values = null) {
-        return fetch({params, values}).then(
-            this._response.handleResponse,
-            this._response.handleErrorResponse,
-        );
-    };
-
     get(endpoint, params = null) {
-        return this._fetch.get(this._baseUrl + makeRoute(endpoint, params)).then(
+        return this._fetch.get(makeUrl(this._baseUrl, endpoint, params)).then(
             this._response.handleResponse,
             this._response.handleErrorResponse,
         );
     }
 
     post(endpoint, values, params = null) {
-        return this._fetch.post(this._baseUrl + makeRoute(endpoint, params), values)
+        return this._fetch.post(makeUrl(this._baseUrl, endpoint, params),
+            values)
             .then(
                 this._response.handleResponse,
                 this._response.handleErrorResponse,
@@ -32,7 +26,7 @@ export default class Request {
     }
 
     put(endpoint, values, params = null) {
-        return this._fetch.put(this._baseUrl + makeRoute(endpoint, params), values)
+        return this._fetch.put(makeUrl(this._baseUrl, endpoint, params), values)
             .then(
                 this._response.handleResponse,
                 this._response.handleErrorResponse,
@@ -40,7 +34,7 @@ export default class Request {
     }
 
     delete(endpoint, params = null) {
-        return this._fetch.delete(this._baseUrl + makeRoute(endpoint, params))
+        return this._fetch.delete(makeUrl(this._baseUrl, endpoint, params))
             .then(
                 this._response.handleResponse,
                 this._response.handleErrorResponse,
