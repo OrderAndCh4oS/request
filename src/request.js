@@ -10,24 +10,29 @@ export default class Request {
     }
 
     get(endpoint, params = null) {
-        return this._fetch.get(makeUrl(this._baseUrl, endpoint, params)).then(
+        return this._fetch.get(
+            makeUrl(this._baseUrl, endpoint, params)
+        ).then(
             this._response.handleResponse,
             this._response.handleErrorResponse,
         );
     }
 
     post(endpoint, values, params = null) {
-        return this._fetch.post(makeUrl(this._baseUrl, endpoint, params),
-            values)
-            .then(
+        return this._fetch.post(
+            makeUrl(this._baseUrl, endpoint, params),
+            values
+        ).then(
                 this._response.handleResponse,
                 this._response.handleErrorResponse,
             );
     }
 
     put(endpoint, values, params = null) {
-        return this._fetch.put(makeUrl(this._baseUrl, endpoint, params), values)
-            .then(
+        return this._fetch.put(
+            makeUrl(this._baseUrl, endpoint, params),
+            values
+        ).then(
                 this._response.handleResponse,
                 this._response.handleErrorResponse,
             );

@@ -31,7 +31,7 @@ export function makeEndpoint(endpoint, params) {
 }
 
 export function makeParams(params) {
-    return params
+    return Array.isArray(params)
         ? '?' + Object.keys(params)
         .map(key => key + '=' + listValues(params, key))
         .join('&')
